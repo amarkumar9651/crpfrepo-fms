@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Vehicles</title>
+</head>
+<body>
+    <h1>All Vehicles</h1>
+    <% for(let vehicle of vehicles){ %>
+    <div>
+           <ul>
+               <li><%=vehicle.name%> </li>
+               <li><%=vehicle.registration%> </li>
+               <li><%=vehicle.isassigned%></li>
+           </ul>
+    <a href="/vehicles/<%=vehicle._id%>">Show vehicle</a> 
+    </div>
+    <% } %>
+    <p> <div><a href="/">Back to home</a>
+
+        <div><a href="/vehicles/new">Add a vehicle</a></div>
+    </div>  </p>
+   
+    
+</body>
+</html>

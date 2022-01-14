@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vehicle Details</title>
+</head>
+<body>
+    <h1>Vehicle Details</h1>
+    <ul>
+        <li><%=vehicle.name%></li>
+        <li><%=vehicle.registration%> </li>
+        <li><%=vehicle.isassigned%> </li>
+    </ul>
+   <p><a href="/vehicles/<%=vehicle._id%>/edit">Assign Vehicle</a></p> 
+   <p><a href="/vehicles">Back to Vehicle list</a></p> 
+    <p><a href="/vehicles/<%=vehicle._id%>/edit">UnAssign Vehicle</a></p>
+</body>
+</html>
