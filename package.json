@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
   "name": "crpfamarejs",
   "version": "1.0.0",
   "description": "",
@@ -14,5 +15,27 @@
     "express": "^4.17.2",
     "mongodb": "^4.3.0",
     "mongoose": "^6.1.6"
+=======
+  "name": "crpfrepo-fms",
+  "version": "1.0.0",
+  "description": "Staring up 14/1/22",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/saurav0022/crpfrepo-fms.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/saurav0022/crpfrepo-fms/issues"
+  },
+  "homepage": "https://github.com/saurav0022/crpfrepo-fms#readme",
+  "dependencies": {
+    "express": "^4.17.2"
+>>>>>>> 7bf3d1cf1a615e526d322f4e2d29da8a56158c73
   }
 }

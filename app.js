@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 const express=require("express");
 const bodyParser=require("body-parser");
 const mongoose=require("mongoose");
@@ -55,3 +56,6 @@ app.post("/",function(req,res)
 app.listen(process.env.PORT || 3000,function(){
     console.log("Server starting on port 3000");
   });
+=======
+const express=require('express')
+>>>>>>> 7bf3d1cf1a615e526d322f4e2d29da8a56158c73
