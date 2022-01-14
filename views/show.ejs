@@ -1,0 +1,13 @@
+<%- include("header") -%>
+
+<div>
+    <h1>Vehicles Detail</h1>
+</div>
+
+<% vehicleList.forEach(function(eachItems){ %>
+    <p><%= eachItems.name %></p>
+    <p><%= eachItems.number %></p>
+    <br>
+ <% }); %>
+
+<%- include("footer") -%>
