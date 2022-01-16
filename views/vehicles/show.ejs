@@ -13,8 +13,10 @@
         <li>Registration Number-<%=vehicle.registration%> </li>
         <li>Isassigned-<%=vehicle.isassigned%> </li>
         <li>Total Kilometers Travelled by Vehicle-<%=vehicle.totalkilom%></li>
-        
+
     </ul>
+    <a href="/vehicles/<%=vehicle._id%>/fuels/new">Add a fuel</a>
+    <a href="/vehicles/<%=vehicle._id%>/fuels">View fuel log</a>
    <p><a href="/vehicles/<%=vehicle._id%>/assign">Assign Vehicle</a></p> 
    <p><a href="/vehicles">Back to Vehicle list</a></p> 
     <p><a href="/vehicles/<%=vehicle._id%>/unassign">UnAssign Vehicle</a></p>

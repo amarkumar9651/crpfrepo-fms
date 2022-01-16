@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FuelIntake</title>
+</head>
+<body>
+    <h1>Fuel Intake Form</h1>
+    <form action="/vehicles/<%=vehicle._id%>/fuels" method="POST">
+        <div>
+            <lable for="time">Enter Date of fuel intake</lable>
+            <input type="date" id="time" name="time" placeholder="<%=Date.now%> " >
+        </div>
+        <div>
+            <lable for="volume">Enter volume of fuel taken</lable>
+            <input type="text" id="volume" name="volume" >
+        </div>
+        <button type="submit">Take Fuel</button>
+    </form>
+</body>
+</html>

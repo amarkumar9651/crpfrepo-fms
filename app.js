@@ -4,6 +4,7 @@ const path = require('path');
 const mongoose = require('mongoose');
 const methodOverride = require('method-override')
 const Vehicle=require('./models/vehicle')
+const Fuel=require('./models/fuel')
 mongoose.connect('mongodb://localhost:27017/fleet-managment', { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => {
         console.log("MONGO CONNECTION OPEN!!!")
@@ -75,11 +76,34 @@ app.put('/vehicles/:id/unassign',async(req,res)=>{
     await vehicle.save()
     res.redirect(`/vehicles/${vehicle._id}`)
 })
+app.get('/vehicles/:id/fuels', async(req,res)=>{
+     const {id}=req.params;
+     const vehicle=await Vehicle.findById(id).populate('fuels');
+     res.render('fuels/index',{vehicle})
+})
+app.get('/vehicles/:id/fuels/new',async(req,res)=>{
+    const {id}=req.params;
+    const vehicle=await Vehicle.findById(id);
+    res.render('fuels/new',{vehicle})
+})
+app.post('/vehicles/:id/fuels',async (req,res)=>{
+    const {id}=req.params;
+    const vehicle=await Vehicle.findById(id);
+    const {volume,time}=req.body;
+    const fuel=new Fuel({volume,time});
+    vehicle.fuels.push(fuel);
+    fuel.vehicle=vehicle;
+    await vehicle.save()
+    await fuel.save()
+    res.redirect(`/vehicles/${id}`)
+})
+
 app.delete('/vehicles/:id',async(req,res)=>{
     const { id } = req.params.id;
     await Vehicle.findByIdAndDelete(id);
     res.redirect('/vehicles');
 })
+
 
 app.get('/',(req,res)=>{
 res.render('home')
