@@ -1,7 +1,7 @@
 const mongoose=require('mongoose')
 const Schema=mongoose.Schema
 
-const vehicleSchema=new Schema({
+const fuelSchema=new Schema({
    name: String,
    registration: Number,
    isassigned: Boolean,
@@ -10,8 +10,7 @@ const vehicleSchema=new Schema({
    Wheeler:Number,
    dop:Date,
    totalkilom:Number,
-   costofvehicle:Number,
-   destination:String
+   costofvehicle:Number
    
 })
 module.exports=mongoose.model('Vehicle',vehicleSchema)
