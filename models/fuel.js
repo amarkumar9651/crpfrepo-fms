@@ -1,16 +1,14 @@
 const mongoose=require('mongoose')
+const Vehicle=require("./vehicle")
 const Schema=mongoose.Schema
 
 const fuelSchema=new Schema({
-   name: String,
-   registration: Number,
-   isassigned: Boolean,
-   //id
-   type:String,
-   Wheeler:Number,
-   dop:Date,
-   totalkilom:Number,
-   costofvehicle:Number
+    volume:Number,
+    time:Date,
+    vehicle: {
+        type: Schema.Types.ObjectId,
+        ref: 'Farm'
+    }
    
 })
-module.exports=mongoose.model('Vehicle',vehicleSchema)
+module.exports=mongoose.model('Fuel',fuelSchema)

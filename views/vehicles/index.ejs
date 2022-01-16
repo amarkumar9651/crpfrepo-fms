@@ -17,15 +17,16 @@
            </ul>
     <a href="/vehicles/<%=vehicle._id%>">Vehicle Detail</a> 
     <!--Assign/Unassign anchor tag-->
+     <!--conditional tag-->
+    <p><a href="/vehicles/<%=vehicle._id%>/assign">Assign Vehicle</a></p> 
+    <p><a href="/vehicles/<%=vehicle._id%>/unassign">UnAssign Vehicle</a></p>
     </div>
     <% } %>
     <p> <div><a href="/">Back to home</a>
 
         <div><a href="/vehicles/new">Add a vehicle</a></div>
     </div>  </p>
-    <!--conditional tag-->
-    <p><a href="/vehicles/<%=vehicle._id%>/edit">Assign Vehicle</a></p> 
-    <p><a href="/vehicles/<%=vehicle._id%>/edit">UnAssign Vehicle</a></p>
-    
+   
+   
 </body>
 </html>

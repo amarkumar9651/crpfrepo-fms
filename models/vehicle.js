@@ -1,4 +1,5 @@
 const mongoose=require('mongoose')
+const Fuel=require('./fuel')
 const Schema=mongoose.Schema
 
 const vehicleSchema=new Schema({
@@ -11,7 +12,12 @@ const vehicleSchema=new Schema({
    dop:Date,
    totalkilom:Number,
    costofvehicle:Number,
-   destination:String
+   destination:String,
+   fuelatp:Number,
+   fuels:[{
+      type: Schema.Types.ObjectId,
+      ref:'Fuel'
+   }]
    
 })
 module.exports=mongoose.model('Vehicle',vehicleSchema)

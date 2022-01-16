@@ -42,17 +42,36 @@ app.get('/vehicles/:id',async (req,res)=>{
     // }
     res.render('vehicles/show',{vehicle});
 })
-app.get('/vehicles/:id/edit',async(req,res)=>{
+app.get('/vehicles/:id/assign',async(req,res)=>{
     const {id}=req.params
     const vehicle=await Vehicle.findById(id)
-    res.render('vehicles/edit',{vehicle})
+    res.render('vehicles/edit/assignmentForm',{vehicle})
 })
-app.put('/vehicles/:id',async(req,res)=>{
-    const {id}=req.params;
-  //  console.log(id)
+app.get('/vehicles/:id/unassign',async(req,res)=>{
+    const {id}=req.params
     const vehicle=await Vehicle.findById(id)
+    res.render('vehicles/edit/unassignmentForm',{vehicle})
+})
+app.put('/vehicles/:id/assign',async(req,res)=>{
+    const {id}=req.params;
     
-    vehicle.isassigned=!(vehicle.isassigned);
+  //  console.log(id)
+  const vehicle=await Vehicle.findByIdAndUpdate(id,{...req.body.vehicle})
+   vehicle.isassigned=true;
+    
+   // vehicle.isassigned=!(vehicle.isassigned);
+    await vehicle.save();
+    res.redirect(`/vehicles/${vehicle._id}`)
+})
+app.put('/vehicles/:id/unassign',async(req,res)=>{
+    const {id}=req.params;
+    
+  //  console.log(id)
+  const vehicle=await Vehicle.findByIdAndUpdate(id,{...req.body.vehicle})
+  vehicle.isassigned=false;
+    
+    
+   // vehicle.isassigned=!(vehicle.isassigned);
     await vehicle.save()
     res.redirect(`/vehicles/${vehicle._id}`)
 })

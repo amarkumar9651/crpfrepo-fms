@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AssignmentForm</title>
+</head>
+<body>
+    <h1>Assignment Form</h1>
+   
+    <form action="/vehicles/<%=vehicle._id%>/assign?_method=PUT" method="POST"> 
+    <div>
+        <label for="destination">Enter Destination</label>
+        <input type="text" id="destination" name="vehicle[destination]">
+   </div>
+   <div>
+       <label for="fuel">Enter CurrentFuel</label>
+       <input type="text" name="vehicle[fuelatp]" id="fuel" placeholder="<%=vehicle.fuel%>" >
+  </div>
+  <button type="submit">Assign</button>
+</form>
+  
+  
+</div>
+</body>
+</html>
