@@ -5,6 +5,8 @@ const mongoose = require('mongoose');
 const methodOverride = require('method-override')
 const Vehicle=require('./models/vehicle')
 const Fuel=require('./models/fuel')
+const Mission=require('./models/missions');
+const missions = require('./models/missions');
 mongoose.connect('mongodb://localhost:27017/fleet-managment', { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => {
         console.log("MONGO CONNECTION OPEN!!!")
@@ -30,7 +32,7 @@ app.get('/vehicles/new',(req,res)=>{
 })
 app.post('/vehicles',async (req,res)=>{
     const vehicle =new Vehicle(req.body.vehicle)
-    console.log(vehicle.category)
+   // console.log(vehicle.category)
     vehicle.isassigned=false;
     await vehicle.save()
     console.log(vehicle)
@@ -56,31 +58,39 @@ app.get('/vehicles/:id/unassign',async(req,res)=>{
 })
 app.put('/vehicles/:id/assign',async(req,res)=>{
     const {id}=req.params;
-    
-  //  console.log(id)
-  const vehicle=await Vehicle.findByIdAndUpdate(id,{...req.body.vehicle})
-   vehicle.isassigned=true;
-    
-   // vehicle.isassigned=!(vehicle.isassigned);
+    const {destination}=req.body;
+    const mission=new Mission(destination);
+    const vehicle=await Vehicle.findByIdAndUpdate(id,{...req.body.vehicle})
+    vehicle.missions.push(mission);
+    vehicle.isassigned=true;
+  
+    mission.vehicle=vehicle;
     await vehicle.save();
+    await mission.save()
     res.redirect(`/vehicles/${vehicle._id}`)
 })
 app.put('/vehicles/:id/unassign',async(req,res)=>{
     const {id}=req.params;
-    
-  //  console.log(id)
-  const vehicle=await Vehicle.findByIdAndUpdate(id,{...req.body.vehicle})
-  vehicle.isassigned=false;
-    
-    
-   // vehicle.isassigned=!(vehicle.isassigned);
-    await vehicle.save()
+  
+  //  const init_vehicle=await Vehicle.findById(id);
+    const vehicle=await Vehicle.findByIdAndUpdate(id,{...req.body.vehicle});
+    const mission= await Mission.findById(vehicle.missions[missions.length -1]._id);
+    //mission.fuelgaugediff=init_vehicle.fuelatp-vehicle.fuelatp;
+    vehicle.isassigned=false;
+    //console.log(mission);
+    await vehicle.save();
+   //await mission.save();
     res.redirect(`/vehicles/${vehicle._id}`)
 })
 app.get('/vehicles/:id/fuels', async(req,res)=>{
      const {id}=req.params;
      const vehicle=await Vehicle.findById(id).populate('fuels');
      res.render('fuels/index',{vehicle})
+})
+app.get('/vehicles/:id/missions', async(req,res)=>{
+    const {id}=req.params;
+    const vehicle=await Vehicle.findById(id).populate('missions');
+    res.render('mission/index',{vehicle})
 })
 app.get('/vehicles/:id/fuels/new',async(req,res)=>{
     const {id}=req.params;

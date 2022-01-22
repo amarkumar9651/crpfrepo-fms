@@ -5,7 +5,9 @@ const Schema=mongoose.Schema
 const vehicleSchema=new Schema({
    name: String,
    registration: Number,
-   isassigned: Boolean,
+   isassigned:{ 
+      type:Boolean,
+ },
    //id
    type:String,
    Wheeler:Number,
@@ -20,6 +22,10 @@ const vehicleSchema=new Schema({
    fuels:[{
       type: Schema.Types.ObjectId,
       ref:'Fuel'
+   }],
+   missions:[{
+      type: Schema.Types.ObjectId,
+      ref:'Mission'
    }]
    
 })
