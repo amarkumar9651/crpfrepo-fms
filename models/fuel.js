@@ -7,7 +7,7 @@ const fuelSchema=new Schema({
     time:Date,
     vehicle: {
         type: Schema.Types.ObjectId,
-        ref: 'Farm'
+        ref: 'Vehicle'
     }
    
 })

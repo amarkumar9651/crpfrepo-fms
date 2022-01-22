@@ -11,9 +11,10 @@
     <% for(let vehicle of vehicles){ %>
     <div>
            <ul>
-               <li><%=vehicle.name%> </li>
-               <li><%=vehicle.registration%> </li>
-               <li><%=vehicle.isassigned%></li>
+            <li>Name of Vehicle-<%=vehicle.name%></li>
+            <li>Registration Number-<%=vehicle.registration%> </li>
+            <li>Isassigned-<%=vehicle.isassigned%> </li>
+               <li>Vehicle Category-<%=vehicle.category%> </li>
            </ul>
     <a href="/vehicles/<%=vehicle._id%>">Vehicle Detail</a> 
     <!--Assign/Unassign anchor tag-->

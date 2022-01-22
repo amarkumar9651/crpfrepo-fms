@@ -30,6 +30,7 @@ app.get('/vehicles/new',(req,res)=>{
 })
 app.post('/vehicles',async (req,res)=>{
     const vehicle =new Vehicle(req.body.vehicle)
+    console.log(vehicle.category)
     vehicle.isassigned=false;
     await vehicle.save()
     console.log(vehicle)

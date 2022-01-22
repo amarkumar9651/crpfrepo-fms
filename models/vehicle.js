@@ -10,10 +10,13 @@ const vehicleSchema=new Schema({
    type:String,
    Wheeler:Number,
    dop:Date,
-   totalkilom:Number,
+   totalkilom:{
+      type:Number,
+   default:0},
    costofvehicle:Number,
    destination:String,
    fuelatp:Number,
+   category:{type:String,default:'LMV'},
    fuels:[{
       type: Schema.Types.ObjectId,
       ref:'Fuel'

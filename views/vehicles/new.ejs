@@ -17,6 +17,14 @@
             <label for="registration">Vehicle Registration</label>
             <input type="text" id="registration" name="vehicle[registration]">
         </div>
+        <div>
+            <label for="category-select">Vehicle Category</label>
+            <select name="vehicle[category]" id="category-select">
+                <option value="">--Please choose an option--</option>
+                <option value="LMV">LMV</option>
+                <option value="HMV">HMV</option>
+            </select>
+        </div>
         <button>Add vehicle</button>
     </form>
     <a href="/vehicles">Back to Vehicles</a>
