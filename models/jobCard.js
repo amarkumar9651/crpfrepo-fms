@@ -2,13 +2,13 @@ const mongoose=require('mongoose')
 const Vehicle=require("./vehicle")
 const Schema=mongoose.Schema
 
-const fuelSchema=new Schema({
-    volume:Number,
-    time:Date,
+const jobCardSchema=new Schema({
+    partName: String ,
+    status:Boolean,
     vehicle: {
         type: Schema.Types.ObjectId,
         ref: 'Vehicle'  //should refer vehicle
     }
    
 })
-module.exports=mongoose.model('Fuel',fuelSchema)
+module.exports=mongoose.model('jobCard',jobCardSchema)

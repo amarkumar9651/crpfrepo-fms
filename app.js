@@ -70,7 +70,7 @@ app.put('/vehicles/:id/unassign',async(req,res)=>{
   //  console.log(id)
   const vehicle=await Vehicle.findByIdAndUpdate(id,{...req.body.vehicle})
   vehicle.isassigned=false;
-    
+    //vehicle.totalkilom=vehicle.totalkilom+res.vehicle[totalkilom];
     
    // vehicle.isassigned=!(vehicle.isassigned);
     await vehicle.save()
@@ -103,6 +103,12 @@ app.delete('/vehicles/:id',async(req,res)=>{
     await Vehicle.findByIdAndDelete(id);
     res.redirect('/vehicles');
 })
+app.post('/newJobCard',function(req,res){
+    res.send("<h1>Saved</h1>");
+})
+app.get('/jobcard',function(req,res){
+   res.render('jobCard/jobcard');
+});
 
 
 app.get('/',(req,res)=>{
