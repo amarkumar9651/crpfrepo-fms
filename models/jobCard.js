@@ -3,8 +3,9 @@ const Vehicle=require("./vehicle")
 const Schema=mongoose.Schema
 
 const jobCardSchema=new Schema({
-    partName: String ,
-    status:Boolean,
+    partName: String,
+    status:Boolean, //default false
+    dateOfJobCard:Date,
     vehicle: {
         type: Schema.Types.ObjectId,
         ref: 'Vehicle'  //should refer vehicle

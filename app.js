@@ -4,7 +4,8 @@ const path = require('path');
 const mongoose = require('mongoose');
 const methodOverride = require('method-override')
 const Vehicle=require('./models/vehicle')
-const Fuel=require('./models/fuel')
+const Fuel=require('./models/fuel');
+const jobCard = require('./models/jobCard');
 mongoose.connect('mongodb://localhost:27017/fleet-managment', { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => {
         console.log("MONGO CONNECTION OPEN!!!")
@@ -103,14 +104,56 @@ app.delete('/vehicles/:id',async(req,res)=>{
     await Vehicle.findByIdAndDelete(id);
     res.redirect('/vehicles');
 })
-app.post('/newJobCard',function(req,res){
-    res.send("<h1>Saved</h1>");
+app.post('/newJobCard/:id',async(req,res)=>{
+    const {id}=req.params;
+    const newParts=req.body.newParts;
+    const dateOfCreation=req.body.dateOfJobCard;
+   
+    const vehicle= await Vehicle.findById(id);
+    const newCard=new jobCard;
+    newCard.partName=newParts;
+    newCard.dateOfJobCard=dateOfCreation;
+    newCard.status=false;
+    newCard.vehicle=vehicle;
+   
+    //console.log(newCard);
+    vehicle.jobCards.push(newCard);
+     await vehicle.save();
+     await newCard.save();
+    //save in database
+    //console.log(newCard);
+    
+    res.send("<h1>JobCard Created</h1>");
 })
-app.get('/jobcard',function(req,res){
-   res.render('jobCard/jobcard');
+app.get('/jobCard/:id',async(req,res)=>{
+    const {id}=req.params;
+    const vehicle=await Vehicle.findById(id);
+    res.render('jobCard/jobCardForm',{vehicle});
+})
+app.get('/jobCardAllVehicles',async(req,res)=>{
+    const vehicles=await Vehicle.find({});
+   res.render('jobCard/showVehicle',{vehicles});
 });
-
-
+app.get('/jobCardPending',async(req,res)=>{
+    const allJobCards=await jobCard.find({status:"false"});
+    //console.log(allJobCards);
+   // res.send("<h1>JobCard Created</h1>");
+    res.render('jobCard/pendingJobCards',{allJobCards});
+})
+app.get('/jobCardIssued',async(req,res)=>{
+    const allJobCards=await jobCard.find({status:"true"});
+    //console.log(allJobCards);
+   // res.send("<h1>JobCard Created</h1>");
+    res.render('jobCard/issuedJobCards',{allJobCards});
+})
+app.get('/issueParts/:id',async(req,res)=>{
+    const {id}=req.params;
+    const cardToBeIssued= await jobCard.findById(id);
+    cardToBeIssued.status=true;
+    //console.log(cardToBeIssued);
+     await cardToBeIssued.save();
+    res.send("<h1>Parts Issued</h1>");
+})
 app.get('/',(req,res)=>{
 res.render('home')
 })

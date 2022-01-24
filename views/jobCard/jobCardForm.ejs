@@ -8,12 +8,15 @@
 </head>
 <body>
     <h1>JOBCARD</h1>
-     <form action="/newJobCard" method="POST">
+     <form action="/newJobCard/<%=vehicle._id %>" method="POST">
          <div>
             <label>Enter Part Name :</label>
-            <input type="text" name="newPart">
-            <label>Enter Vehicle Reg. NO. :</label>
-            <input type="Number">
+            <input type="text" name="newParts">
+          
+            <p>Vehicle Registration No.  <%= vehicle.registration %> </p>
+           
+            <label>Enter Date :</label>
+            <input type="date" name="dateOfJobCard">
          </div>
          <button type="submit">Add</button>
      </form>

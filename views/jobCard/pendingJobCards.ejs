@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pending JobCards</title>
+</head>
+<body>
+    <h1>Pending JobCards</h1>
+    <% for(let jobCard of allJobCards){ %>
+     <div>  
+          <ul>                      
+           
+              <li><%=jobCard.partName%> </li>     
+               <li><%=jobCard.dateOfJobCard%> </li>   
+              
+           </ul>                                      
+           <a href="/issueParts/<%=jobCard._id%>">Issue Parts</a>
+   </div>                                             
+    <% } %>
+   
+   
+</body>
+</html>
