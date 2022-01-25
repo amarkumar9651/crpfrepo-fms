@@ -1,12 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vehicle Details</title>
-</head>
-<body>
+<% layout('layouts/boilerplate') %> 
+
     <h1>Vehicle Details</h1>
     <ul>
         <li>Name of Vehicle-<%=vehicle.name%></li>
@@ -16,16 +9,18 @@
         <li>Vehicle Category-<%=vehicle.category%> </li>
 
     </ul>
-    <a href="/vehicles/<%=vehicle._id%>/fuels/new">Add a fuel</a>
-    <a href="/vehicles/<%=vehicle._id%>/fuels">View fuel log</a>
-    <a href="/vehicles/<%=vehicle._id%>/missions">View mission log</a>
+    <div class="d-grid gap-2">
+        <a class="btn btn-primary" href="/vehicles/<%=vehicle._id%>/fuels/new">Add a fuel</a>
+        <a class="btn btn-primary" href="/vehicles/<%=vehicle._id%>/fuels">View fuel log</a>
+        <a class="btn btn-primary" href="/vehicles/<%=vehicle._id%>/missions">View mission log</a>
+  
     <% if(!vehicle.isassigned){ %> 
-   <p><a href="/vehicles/<%=vehicle._id%>/assign">Assign Vehicle</a></p>
+   <a class="btn btn-primary" href="/vehicles/<%=vehicle._id%>/assign">Assign Vehicle</a>
    <% } %>  
    <% if(vehicle.isassigned){ %> 
-    <p><a href="/vehicles/<%=vehicle._id%>/unassign">UnAssign Vehicle</a></p>
-    <% } %> 
+    <a class="btn btn-primary" href="/vehicles/<%=vehicle._id%>/unassign">UnAssign Vehicle</a>
+    <% } %>
+    </div>
    <p><a href="/vehicles">Back to Vehicle list</a></p> 
    
-</body>
-</html>
+

@@ -1,12 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>All Vehicles</title>
-</head>
-<body>
+<% layout('layouts/boilerplate') %> 
     <h1>All Vehicles</h1>
     <% for(let vehicle of vehicles){ %>
     <div>
@@ -16,18 +8,17 @@
             <li>Isassigned-<%=vehicle.isassigned%> </li>
                <li>Vehicle Category-<%=vehicle.category%> </li>
            </ul>
-    <a href="/vehicles/<%=vehicle._id%>">Vehicle Detail</a> 
-    <!--Assign/Unassign anchor tag-->
-     <!--conditional tag-->
-    <p><a href="/vehicles/<%=vehicle._id%>/assign">Assign Vehicle</a></p> 
-    <p><a href="/vehicles/<%=vehicle._id%>/unassign">UnAssign Vehicle</a></p>
-    </div>
-    <% } %>
-    <p> <div><a href="/">Back to home</a>
+    <a class="btn btn-primary"href="/vehicles/<%=vehicle._id%>" role="button">Vehicle Detail</a> 
+ <%if (vehicle.isassigned) { %> 
+    <a class="btn btn-primary" href="/vehicles/<%=vehicle._id%>/unassign" role="button">UnAssign Vehicle</a>
 
-        <div><a href="/vehicles/new">Add a vehicle</a></div>
+    <%} else{ %> 
+    <a class="btn btn-primary" href="/vehicles/<%=vehicle._id%>/assign" role="button">Assign Vehicle</a>
+ 
+    
+    <% } %>
+    <% } %>
+    <p> <div><a class="btn btn-primary" href="/">Back to home</a>
+
+        <div><a class="btn btn-primary" href="/vehicles/new">Add a vehicle</a></div>
     </div>  </p>
-   
-   
-</body>
-</html>

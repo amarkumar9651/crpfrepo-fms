@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const mongoose = require('mongoose');
+const ejsMate=require('ejs-mate');
 const methodOverride = require('method-override')
 const Vehicle=require('./models/vehicle')
 const Fuel=require('./models/fuel')
@@ -15,7 +16,7 @@ mongoose.connect('mongodb://localhost:27017/fleet-managment', { useNewUrlParser:
         console.log("OH NO MONGO CONNECTION ERROR!!!!")
         console.log(err)
     })
-
+app.engine('ejs',ejsMate);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
     
@@ -74,7 +75,7 @@ app.put('/vehicles/:id/unassign',async(req,res)=>{
   
   //  const init_vehicle=await Vehicle.findById(id);
     const vehicle=await Vehicle.findByIdAndUpdate(id,{...req.body.vehicle});
-    const mission= await Mission.findById(vehicle.missions[missions.length -1]._id);
+   // const mission= await Mission.findById(vehicle.missions[missions.length -1]._id);
     //mission.fuelgaugediff=init_vehicle.fuelatp-vehicle.fuelatp;
     vehicle.isassigned=false;
     //console.log(mission);

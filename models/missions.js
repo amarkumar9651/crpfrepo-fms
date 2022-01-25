@@ -10,7 +10,9 @@ const missionSchema=new Schema({
         type: Schema.Types.ObjectId,
         ref: 'Vehicle'
     },
-    fuelgaugediff:Number,
+    startfuel:Number,
+    endfuel:Number,
+    fuelgaugediff:Number,//omit
     kmgaugediff:Number
    
 })

@@ -1,32 +1,31 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add New Vehicle</title>
-</head>
-<body>
+<% layout('layouts/boilerplate') %> 
     <h1>Add New Vehicle</h1>
-    <form action="/vehicles" method="POST">
+    <form class="needs-validation" action="/vehicles" method="POST" novalidate>
         <div>
-            <label for="name">Vehicle Name</label>
-            <input type="text" id="name" name="vehicle[name]">
+            <label class="from-label"  for="name">Vehicle Name</label>
+            <input class="form-control" type="text" id="name" name="vehicle[name]" required>
+            <div class="valid-feedback">
+                Looks good!
+            </div>
         </div>
         <div>
-            <label for="registration">Vehicle Registration</label>
-            <input type="text" id="registration" name="vehicle[registration]">
+            <label class="from-label" for="registration">Vehicle Registration</label>
+            <input class="form-control" type="text" id="registration" name="vehicle[registration]" required>
+            <div class="valid-feedback">
+                Looks good!
+            </div>
         </div>
         <div>
-            <label for="category-select">Vehicle Category</label>
-            <select name="vehicle[category]" id="category-select">
+            <label class="from-label"for="category-select">Vehicle Category</label>
+            <select class="form-select" name="vehicle[category]" id="category-select" required>
                 <option value="">--Please choose an option--</option>
                 <option value="LMV">LMV</option>
                 <option value="HMV">HMV</option>
             </select>
+            <div class="invalid-feedback">
+                Please Select a valid category
+            </div>
         </div>
-        <button>Add vehicle</button>
+        <button class="btn btn-primary" type="submit">Add vehicle</button>
     </form>
     <a href="/vehicles">Back to Vehicles</a>
-</body>
-</html>
