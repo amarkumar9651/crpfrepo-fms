@@ -7,6 +7,7 @@ const vehicleSchema=new Schema({
    registration: Number,
    isassigned:{ 
       type:Boolean,
+      default:false
  },
    //id
    type:String,
