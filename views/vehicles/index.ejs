@@ -1,24 +1,59 @@
 <% layout('layouts/boilerplate') %> 
+
+
     <h1>All Vehicles</h1>
-    <% for(let vehicle of vehicles){ %>
+
+ <% var formaction="LMV"; %>
+  <% 
+      function actionOnSubmit()
+        {
+
+        //Get the select select list and store in a variable
+        var e = document.getElementById("category");
+
+        //Get the selected value of the select list
+        formaction = e.options[e.selectedIndex].value;
+
+         for(let vehicle of vehicles){ 
+         if(vehicle.category === formaction) {
     <div>
            <ul>
-            <li>Name of Vehicle-<%=vehicle.name%></li>
-            <li>Registration Number-<%=vehicle.registration%> </li>
-            <li>Isassigned-<%=vehicle.isassigned%> </li>
-               <li>Vehicle Category-<%=vehicle.category%> </li>
+            <li>Name of Vehicle-vehicle.name</li>
+            <li>Registration Number-vehicle.registration </li>
+            <li>Isassigned-vehicle.isassigned </li>
+            <li>Vehicle Category-vehicle.category </li>
            </ul>
-    <a class="btn btn-primary"href="/vehicles/<%=vehicle._id%>" role="button">Vehicle Detail</a> 
- <%if (vehicle.isassigned) { %> 
-    <a class="btn btn-primary" href="/vehicles/<%=vehicle._id%>/unassign" role="button">UnAssign Vehicle</a>
+    <a class="btn btn-primary" href="/vehicles/vehicle._id" role="button">Vehicle Detail</a> 
+           
+    if (vehicle.isassigned) { 
+    <a class="btn btn-primary" href="/vehicles/vehicle._id/unassign" role="button">UnAssign Vehicle</a>
+    }
+     else{ 
+    <a class="btn btn-primary" href="/vehicles/vehicle._id/assign" role="button">Assign Vehicle</a>
+        }
+        </div>
+     } 
+     } 
 
-    <%} else{ %> 
-    <a class="btn btn-primary" href="/vehicles/<%=vehicle._id%>/assign" role="button">Assign Vehicle</a>
- 
-    
-    <% } %>
-    <% } %>
     <p> <div><a class="btn btn-primary" href="/">Back to home</a>
 
         <div><a class="btn btn-primary" href="/vehicles/new">Add a vehicle</a></div>
     </div>  </p>
+
+        
+        console.log(formaction);
+        }
+  %>
+
+    <form onChange="actionOnSubmit()">
+        <label for="category">Choose a Category:</label>
+
+        <select name="cat" id="category">
+          <option value="LMV">LMV</option>
+          <option value="HMV">HMV</option>
+        </select>
+        
+    </form>
+
+
+    

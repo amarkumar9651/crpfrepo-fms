@@ -34,6 +34,9 @@ const sessionConfig = {
     }
 }
 app.use(session(sessionConfig))
+
+
+
 app.use('/vehicles',vehicleRoutes)
 app.get('/',(req,res)=>{
 res.render('home')
@@ -47,6 +50,9 @@ app.use((err,req,res,next)=>{
     err.message="Something went wrong"
     res.status(statusCode).render('error',{err});
 })
+
+
+
 app.listen(3000, () => {
     console.log("APP IS LISTENING ON PORT 3000!")
 })

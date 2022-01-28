@@ -110,4 +110,5 @@ router.delete('/:id',catchAsync(async(req,res,next)=>{
     await Vehicle.findByIdAndDelete(id);
     res.redirect('/vehicles');
 }))
+
 module.exports=router
