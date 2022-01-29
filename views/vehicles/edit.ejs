@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unassignment</title>
+</head>
+<body>
+    <h1>UnAssignment Form</h1>
+    <div>
+        <h2>Vehicle Details</h2>
+        <ul>
+            <li><%=vehicle.name%> </li>
+            <li><%=vehicle._id%> </li>
+        </ul>
+    </div>
+    <form action="/vehicles/<%=vehicle._id%>?_method=PUT" method="POST">
+
+    <button>Assign</button>
+    <form action="/vehicles/<%=vehicle._id%>?_method=PUT" method="POST">
+
+        <button>UnAssign</button>
+    </form>
+    <a href="/vehicles">backto vehicles</a>
+</body>
+</html>

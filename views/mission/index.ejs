@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MISSION Log</title>
+</head>
+<body>
+    <h1>Mission Log For Vehicle <%=vehicle.name%> </h1>
+    <% for(let dest of vehicle.missions){ %>
+        <p>  <ul>
+            <li>Date of Mission-<%= dest.time.getDate() %>-<%= dest.time.getMonth()+1%>-<%=dest.time.getFullYear() %>   </li>
+            <li>Mission Location -<%= dest.location %> </li>
+            <li>Mission distance -<%= dest.distance %> </li>
+        </ul>
+    </p>
+      
+        <% } %>  
+    <a href="/vehicles/<%=vehicle._id%>">Back to Vehicle</a>
+</body>
+</html>

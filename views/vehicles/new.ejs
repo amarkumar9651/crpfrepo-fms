@@ -1,0 +1,31 @@
+<% layout('layouts/boilerplate') %> 
+    <h1>Add New Vehicle</h1>
+    <form class="needs-validation" action="/vehicles" method="POST" novalidate>
+        <div>
+            <label class="from-label"  for="name">Vehicle Name</label>
+            <input class="form-control" type="text" id="name" name="vehicle[name]" required>
+            <div class="valid-feedback">
+                Looks good!
+            </div>
+        </div>
+        <div>
+            <label class="from-label" for="registration">Vehicle Registration</label>
+            <input class="form-control" type="text" id="registration" name="vehicle[registration]" required>
+            <div class="valid-feedback">
+                Looks good!
+            </div>
+        </div>
+        <div>
+            <label class="from-label"for="category-select">Vehicle Category</label>
+            <select class="form-select" name="vehicle[category]" id="category-select" required>
+                <option value="">--Please choose an option--</option>
+                <option value="LMV">LMV</option>
+                <option value="HMV">HMV</option>
+            </select>
+            <div class="invalid-feedback">
+                Please Select a valid category
+            </div>
+        </div>
+        <button class="btn btn-primary" type="submit">Add vehicle</button>
+    </form>
+    <a href="/vehicles">Back to Vehicles</a>

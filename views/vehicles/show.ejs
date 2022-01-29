@@ -1,0 +1,26 @@
+<% layout('layouts/boilerplate') %> 
+
+    <h1>Vehicle Details</h1>
+    <ul>
+        <li>Name of Vehicle-<%=vehicle.name%></li>
+        <li>Registration Number-<%=vehicle.registration%> </li>
+        <li>Isassigned-<%=vehicle.isassigned%> </li>
+        <li>Total Kilometers Travelled by Vehicle-<%=vehicle.totalkilom%></li>
+        <li>Vehicle Category-<%=vehicle.category%> </li>
+
+    </ul>
+    <div class="d-grid gap-2">
+        <a class="btn btn-primary" href="/vehicles/<%=vehicle._id%>/fuels/new">Add a fuel</a>
+        <a class="btn btn-primary" href="/vehicles/<%=vehicle._id%>/fuels">View fuel log</a>
+        <a class="btn btn-primary" href="/vehicles/<%=vehicle._id%>/missions">View mission log</a>
+  
+    <% if(!vehicle.isassigned){ %> 
+   <a class="btn btn-primary" href="/vehicles/<%=vehicle._id%>/assign">Assign Vehicle</a>
+   <% } %>  
+   <% if(vehicle.isassigned){ %> 
+    <a class="btn btn-primary" href="/vehicles/<%=vehicle._id%>/unassign">UnAssign Vehicle</a>
+    <% } %>
+    </div>
+   <p><a href="/vehicles">Back to Vehicle list</a></p> 
+   
+

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AssignmentForm</title>
+</head>
+<body>
+    <h1>Assignment Form</h1>
+   
+    <form action="/vehicles/<%=vehicle._id%>/assign?_method=PUT" method="POST"> 
+  
+   <div>
+       <label for="fuel">Enter CurrentFuel</label>
+       <input type="text" name="vehicle[fuelatp]" id="fuel" placeholder="<%=vehicle.fuelatp%>" >
+   </div>
+  <div>
+    <label for="destination-location">Enter Destination</label>
+    <input type="text" name="destination[location]" id="destination-location" placeholder="Enter Location" >
+  </div>
+  <div>
+    <label for="destination-distance">Enter Destination Distance</label>
+    <input type="text" name="destination[distance]" id="destination-distance" placeholder="Enter distance in km" >
+  </div>
+  <div>
+    <lable for="destination-time">Enter Date of MISSION</lable>
+    <input type="date" id="destination-time" name="destination[time]" placeholder="<%=Date.now%> " >
+</div>
+
+  
+  <button type="submit">Assign</button>
+</form>
+  
+  
+</div>
+</body>
+</html>

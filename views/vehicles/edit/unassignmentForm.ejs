@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UnAssignmentForm</title>
+</head>
+<body>
+    <h1>UnAssignment Form</h1>
+   
+    <form action="/vehicles/<%=vehicle._id%>/unassign?_method=PUT" method="POST"> 
+    <div>
+        <label for="kilom">Enter total distance travelled</label>
+        <input type="text" id="kilom" name="vehicle[totalkilom]">
+   </div>
+   <div>
+       <label for="fuel">Enter currentfuel status</label>
+       <input type="text" name="vehicle[fuelatp]" id="fuel" placeholder="<%=vehicle.fuel%>" >
+  </div>
+  <button type="submit">UnAssign</button>
+</form>
+  
+  
+</div>
+</body>
+</html>

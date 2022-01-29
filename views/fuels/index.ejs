@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fuel Log</title>
+</head>
+<body>
+    <h1>Fuel Log For Vehicle <%=vehicle.name%> </h1>
+    <% for(let fuel of vehicle.fuels){ %>
+        <p>  <ul>
+            <li>Fuel Date-<%= fuel.time.getDate() %>-<%= fuel.time.getMonth()+1%>-<%=fuel.time.getFullYear() %>   </li>
+            <li>Fuel quantity-<%= fuel.volume %> </li>
+        </ul>
+    </p>
+      
+        <% } %>  
+    <a href="/vehicles/<%=vehicle._id%>">Back to Vehicle</a>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<% layout('layouts/boilerplate') %> 
+    <h1>All Vehicles</h1>
+    <form action="/search/index" method="POST">
+      <div>
+        <label for="category">Enter Category</label>
+        <input type="text" name="category" id="category">
+      </div>
+      <button type="submit" class="btn btn-danger">Submit</button>
+    </form>
+    <% for(let vehicle of vehicles){ %>
+    <div>
+           <ul>
+            <li>Name of Vehicle-<%=vehicle.name%></li>
+            <li>Registration Number-<%=vehicle.registration%> </li>
+            <li>Isassigned-<%=vehicle.isassigned%> </li>
+               <li>Vehicle Category-<%=vehicle.category%> </li>
+           </ul>
+    <a class="btn btn-primary"href="/vehicles/<%=vehicle._id%>" role="button">Vehicle Detail</a> 
+ <%if (vehicle.isassigned) { %> 
+    <a class="btn btn-primary" href="/vehicles/<%=vehicle._id%>/unassign" role="button">UnAssign Vehicle</a>
+
+    <%} else{ %> 
+    <a class="btn btn-primary" href="/vehicles/<%=vehicle._id%>/assign" role="button">Assign Vehicle</a>
+    <% } %>
+    <% } %>
+    <p> <div><a class="btn btn-primary" href="/">Back to home</a>
+
+        <div><a class="btn btn-primary" href="/vehicles/new">Add a vehicle</a></div>
+    </div>  </p>
+    <script>
+      console.log(vehicles)
+    </script>
