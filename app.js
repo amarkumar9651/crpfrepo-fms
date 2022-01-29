@@ -42,9 +42,12 @@ app.use(session(sessionConfig))
 app.use('/vehicles',vehicleRoutes)
 app.post('/search/index',catchAsync(async(req,res,next)=>{
 const category=req.body.category;
+const isassigned=req.body.assign;
+console.log(category);
 if(category!='')
 {
-   const vehicles=await Vehicle.find({category:category})
+   const vehicles=await Vehicle.find({category:category, isassigned:isassigned})
+   console.log(vehicles);
    res.render('vehicles/index',{vehicles})
 }
 else{
