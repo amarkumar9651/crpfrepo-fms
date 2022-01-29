@@ -7,6 +7,7 @@ const methodOverride = require('method-override')
 const session = require('express-session')
 const ExpressError=require('./utils/ExpressError')
 const vehicleRoutes=require('./routes/vehicles.js')
+const userRoutes=require('./routes/users.js')
 mongoose.connect('mongodb://localhost:27017/fleet-managment', 
 { useNewUrlParser: true, 
   useUnifiedTopology: true })
@@ -35,6 +36,7 @@ const sessionConfig = {
 }
 app.use(session(sessionConfig))
 app.use('/vehicles',vehicleRoutes)
+app.use('/users',userRoutes)
 app.get('/',(req,res)=>{
 res.render('home')
 })

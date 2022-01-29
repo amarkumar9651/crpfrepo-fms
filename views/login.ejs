@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Login Form</title>
+    <link rel="stylesheet" type="text/css" href="../css/loginpagedesign.css">
+</head>
+    <body>
+        <div class="loginbox">
+            <img src="../img/avatar.jpg" class="avatar">
+            <h2 style="text-align:center;">Login Here</h2>
+            <form action="/users/login" method="POST">
+                <p>Username</p>
+                <input type="text" name="email" placeholder="Enter Username">
+                <p>Passsword</p>
+                <input type="password" name="password" placeholder="Enter Password">
+                <input type="submit" name="" value="Login">
+                <a href="./register">Don't have an account? Sign Up here</a>
+
+
+
+                <!-- <form action="/users/login" method="POST">
+                    <input name="email" type="text" placeholder="E-mail">
+                <input name="password" type="text" placeholder="Password">
+                <button>Submit</button>
+                </form> -->
+                
+            </form>
+        </div>
+    </body>
+</html>
+
+
+<!-- <body>
+    <h1>Login Form</h1>
+    <form action="/users/login" method="POST">
+        <input name="email" type="text" placeholder="E-mail">
+    <input name="password" type="text" placeholder="Password">
+    <button>Submit</button>
+    </form>
+    
+</body> -->

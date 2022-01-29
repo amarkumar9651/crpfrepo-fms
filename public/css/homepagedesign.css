@@ -1,0 +1,54 @@
+#ab0{
+		
+	background-image: url("https://www.apssb.in/wp-content/uploads/2021/07/CRPF-3.jpg");
+	background-size: cover;
+	background-attachment: fixed;
+	    }
+	
+	.content {
+		        
+				width: 50%;
+				padding:1px;
+				margin: 50px auto;				
+				color : white;
+	      }
+	
+	#name{
+		font-size: 50px;
+		text-shadow:4px 4px 4px;
+	}
+	#college{
+		font-size: 50px;
+	}
+	
+    #a{
+        font-size: 35px;
+        color: chartreuse;
+    }
+	.container{
+		text-align:right;
+		margin-top:15px;
+	}
+	.btn1{
+		border:1px solid white;
+		background:none;
+		padding:10px 20px;
+		font-size:20px;
+		font-family:"montserrat";
+		cursor:pointer;
+		margin:10px;
+		color:white;
+		transition:0.5s;		
+	}
+	button:hover{
+		color:#349edb;
+	}
+	
+	#name{
+		transition:1.5s;
+	}
+	
+	#name:hover{
+		color:orange;
+		
+	}
