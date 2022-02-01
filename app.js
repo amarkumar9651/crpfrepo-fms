@@ -6,9 +6,12 @@ const ejsMate=require('ejs-mate');
 const methodOverride = require('method-override')
 const session = require('express-session')
 const Vehicle=require('./models/vehicle')
+const Mission=require('./models/missions')
+const Fuel=require('./models/fuel')
 const ExpressError=require('./utils/ExpressError')
 const catchAsync=require('./utils/catchAsync')
 const vehicleRoutes=require('./routes/vehicles.js')
+const ObjectId=require('mongodb').ObjectID;
 mongoose.connect('mongodb://localhost:27017/fleet-managment', 
 { useNewUrlParser: true, 
   useUnifiedTopology: true })
@@ -54,7 +57,86 @@ else{
 res.redirect('/vehicles')
 }
 }))
-app.get('/',(req,res)=>{
+
+app.post('/:id/search',catchAsync(async(req,res,next)=>{
+    const day1=req.body.day1;
+    const month1=req.body.month1;
+    const year1=req.body.year1;
+    const day2=req.body.day2;
+    const month2=req.body.month2;
+    const year2=req.body.year2;
+
+    const {id}=req.params;
+    const vehicles=await Vehicle.findById(id);
+    
+    let date1=new Date(year1,month1,day1-30,0-18,0-30,0,0).toISOString();
+    let date2=new Date(year2,month2-1,day2,23+5,59+30,59,0).toISOString();
+    
+
+       const missionNew=await Mission.find({vehicle:ObjectId(vehicles).toString(), time:{$gte:date1,$lte:date2}});
+        // console.log(missionNew);
+       console.log(ObjectId(vehicles).toString());
+    
+    // console.log(id);
+
+    const missionBefore=await Mission.find({vehicle:id});
+
+       const vehicleNew=await Vehicle.updateOne({_id:id},{ missions : missionNew});
+        //  console.log(vehicleNew);
+
+        const vehicle=await Vehicle.findById(id).populate('missions');
+        // console.log(vehicle);
+
+        res.render('mission/index',{vehicle})
+
+        const missionAfter=await Vehicle.updateOne({_id:id},{ missions : missionBefore});        
+
+    }
+    
+    ))
+    
+app.post('/:id/searchFuel',catchAsync(async(req,res,next)=>{
+    const day1=req.body.day1;
+    const month1=req.body.month1;
+    const year1=req.body.year1;
+    const day2=req.body.day2;
+    const month2=req.body.month2;
+    const year2=req.body.year2;
+
+    const {id}=req.params;
+    const vehicles=await Vehicle.findById(id);
+    
+    let date1=new Date(year1,month1,day1-30,0-18,0-30,0,0).toISOString();
+    let date2=new Date(year2,month2-1,day2,23+5,59+30,59,0).toISOString();
+
+    // console.log(date1);
+    // console.log(date2);
+    
+
+        const fuelNew=await Fuel.find({vehicle:ObjectId(vehicles).toString(), time:{$gte:date1,$lte:date2}});
+        // console.log(fuelNew);
+        console.log(ObjectId(vehicles).toString());
+    
+    // console.log(id);
+
+    const fuelBefore=await Fuel.find({vehicle:id});
+
+        const vehicleNew=await Vehicle.updateOne({_id:id},{ fuels : fuelNew});
+    // console.log(vehicleNew);
+
+        const vehicle=await Vehicle.findById(id).populate('fuels');
+    // console.log(vehicle);
+
+        res.render('fuels/index',{vehicle})
+
+        const fuelAfter=await Vehicle.updateOne({_id:id},{ fuels : fuelBefore});        
+
+    }
+    
+    ))
+
+
+    app.get('/',(req,res)=>{
 res.render('home')
 })
 app.all('*',(req,res,next)=>{
