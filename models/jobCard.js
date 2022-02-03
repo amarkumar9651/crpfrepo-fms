@@ -1,5 +1,6 @@
 const mongoose=require('mongoose')
 const Vehicle=require("./vehicle")
+const defectMemo= require("./defectMemo")
 const Schema=mongoose.Schema
 
 const jobCardSchema=new Schema({
@@ -9,6 +10,10 @@ const jobCardSchema=new Schema({
     vehicle: {
         type: Schema.Types.ObjectId,
         ref: 'Vehicle'  //should refer vehicle
+    },
+    defectMemo:{
+        type: Schema.Types.ObjectId,
+        ref: 'defectMemo' 
     }
    
 })

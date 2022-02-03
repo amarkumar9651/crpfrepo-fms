@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Non Attended Memo</title>
+</head>
+<body>
+    <h1>Non Attended Memo</h1>
+    <% for(let defectMemo of allDefectMemo){ %>
+     <div>  
+          <ul>                      
+                 
+              <li><%=defectMemo.defect%> </li>     
+               <li><%=defectMemo.dateOfDefect%> </li>   
+              
+           </ul>                                      
+           <a href="/jobCard/<%=defectMemo._id%>">create jobcard</a>
+   </div>                                             
+    <% } %>
+   
+   
+</body>
+</html>

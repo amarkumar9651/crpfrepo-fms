@@ -6,6 +6,8 @@ const methodOverride = require('method-override')
 const Vehicle=require('./models/vehicle')
 const Fuel=require('./models/fuel');
 const jobCard = require('./models/jobCard');
+const defectMemo =require('./models/defectMemo');
+
 mongoose.connect('mongodb://localhost:27017/fleet-managment', { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => {
         console.log("MONGO CONNECTION OPEN!!!")
@@ -106,29 +108,44 @@ app.delete('/vehicles/:id',async(req,res)=>{
 })
 app.post('/newJobCard/:id',async(req,res)=>{
     const {id}=req.params;
+
     const newParts=req.body.newParts;
     const dateOfCreation=req.body.dateOfJobCard;
    
-    const vehicle= await Vehicle.findById(id);
+    const defMemo= await defectMemo.findById(id);
+    console.log(defMemo);
+    const vehicleId=defMemo.vehicle;
+    
+    const vehicle=await Vehicle.findById(vehicleId);
+    console.log(vehicle);
+    
     const newCard=new jobCard;
     newCard.partName=newParts;
     newCard.dateOfJobCard=dateOfCreation;
     newCard.status=false;
     newCard.vehicle=vehicle;
-   
-    //console.log(newCard);
-    vehicle.jobCards.push(newCard);
-     await vehicle.save();
-     await newCard.save();
-    //save in database
-    //console.log(newCard);
     
+    
+    
+    console.log(vehicle);
+    console.log(newCard);
+    
+    defMemo.status=true;
+    defMemo.jobCard=newCard;
+    newCard.defectMemo=defMemo;
+    vehicle.jobCards.push(newCard);
+    await vehicle.save();
+    await defMemo.save();
+    
+     console.log(defMemo);
+   
+     
     res.send("<h1>JobCard Created</h1>");
 })
 app.get('/jobCard/:id',async(req,res)=>{
     const {id}=req.params;
-    const vehicle=await Vehicle.findById(id);
-    res.render('jobCard/jobCardForm',{vehicle});
+    const defMemo=await defectMemo.findById(id);
+    res.render('jobCard/jobCardForm',{defMemo});
 })
 app.get('/jobCardAllVehicles',async(req,res)=>{
     const vehicles=await Vehicle.find({});
@@ -153,6 +170,36 @@ app.get('/issueParts/:id',async(req,res)=>{
     //console.log(cardToBeIssued);
      await cardToBeIssued.save();
     res.send("<h1>Parts Issued</h1>");
+})
+app.post('/newMemo/:id',async(req,res)=>{
+    const {id}=req.params;
+    const newDefect=req.body.newDefect;
+    const dateOfMemo=req.body.dateOfDefect;
+   
+    const vehicle= await Vehicle.findById(id);
+    const newMemo=new defectMemo;
+    newMemo.defect=newDefect;
+    newMemo.dateOfDefect=dateOfMemo;
+    newMemo.status=false;
+    newMemo.vehicle=vehicle;
+    vehicle.defectMemos.push(newMemo);
+    await vehicle.save();
+    await newMemo.save();
+    res.send("Memo Created");
+    //res.redirect('/');
+})
+app.get('/createDefectMemo/:id',async(req,res)=>{
+    const {id}=req.params;
+    const vehicle=await Vehicle.findById(id);
+    res.render('defectMemo/createMemo',{vehicle});
+})
+app.get('/attendedDefectMemo',async(req,res)=>{
+      const allDefectMemo=await defectMemo.find({status:true});
+      res.render('defectMemo/attendedDefectMemo',{allDefectMemo});
+})
+app.get('/nonAttendedDefectMemo',async(req,res)=>{
+    const allDefectMemo=await defectMemo.find({status:false});
+    res.render('defectMemo/nonAttendedDefectMemo',{allDefectMemo});
 })
 app.get('/',(req,res)=>{
 res.render('home')

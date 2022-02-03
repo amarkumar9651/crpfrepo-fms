@@ -4,19 +4,19 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JobCard</title>
+    <title>Defect Memo</title>
 </head>
 <body>
-    <h1>JOBCARD</h1>
-     <form action="/newJobCard/<%=defMemo._id %>" method="POST">
+    <h1>DEFECT MEMO</h1>
+     <form action="/newMemo/<%=vehicle._id %>" method="POST">
          <div>
-            <label>Enter Part Name :</label>
-            <input type="text" name="newParts">
+            <label>Enter Defect Name :</label>
+            <input type="text" name="newDefect">
           
-            <p>Vehicle Registration No.  <%= defMemo.vehicle.registration %> </p>
+            <p>Vehicle Registration No.  <%= vehicle.registration %> </p>
            
             <label>Enter Date :</label>
-            <input type="date" name="dateOfJobCard">
+            <input type="date" name="dateOfDefect">
          </div>
          <button type="submit">Add</button>
      </form>
