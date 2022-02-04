@@ -18,8 +18,9 @@ if(error){
     }
 }
     
+
 router.get('/',catchAsync( async(req,res)=>{
-    const vehicles=await Vehicle.find({});
+    const vehicles=await Vehicle.find({}).sort({name:1});
     //console.log(vehicles)
     res.render('vehicles/index',{vehicles});
 }))

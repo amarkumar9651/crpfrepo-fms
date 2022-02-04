@@ -12,6 +12,9 @@ const ExpressError=require('./utils/ExpressError')
 const catchAsync=require('./utils/catchAsync')
 const vehicleRoutes=require('./routes/vehicles.js')
 const ObjectId=require('mongodb').ObjectID;
+const { db } = require('./models/fuel');
+const { LOADIPHLPAPI } = require('dns');
+const vehicle = require('./models/vehicle');
 mongoose.connect('mongodb://localhost:27017/fleet-managment', 
 { useNewUrlParser: true, 
   useUnifiedTopology: true })
@@ -49,8 +52,9 @@ const isassigned=req.body.assign;
 console.log(category);
 if(category!='')
 {
-   const vehicles=await Vehicle.find({category:category, isassigned:isassigned})
+   const vehicles=await Vehicle.find({category:category, isassigned:isassigned}).sort({name:1})
    console.log(vehicles);
+
    res.render('vehicles/index',{vehicles})
 }
 else{
@@ -75,7 +79,7 @@ app.post('/:id/search',catchAsync(async(req,res,next)=>{
 
        const missionNew=await Mission.find({vehicle:ObjectId(vehicles).toString(), time:{$gte:date1,$lte:date2}});
         // console.log(missionNew);
-       console.log(ObjectId(vehicles).toString());
+       //console.log(ObjectId(vehicles).toString());
     
     // console.log(id);
 
@@ -84,8 +88,8 @@ app.post('/:id/search',catchAsync(async(req,res,next)=>{
        const vehicleNew=await Vehicle.updateOne({_id:id},{ missions : missionNew});
         //  console.log(vehicleNew);
 
-        const vehicle=await Vehicle.findById(id).populate('missions');
-        // console.log(vehicle);
+        const vehicle=await Vehicle.findById(id).populate({path: "missions", select:["time","distance","location"], options:{sort: {time:1}}});
+         //console.log(vehicle);
 
         res.render('mission/index',{vehicle})
 
@@ -102,9 +106,8 @@ app.post('/:id/searchFuel',catchAsync(async(req,res,next)=>{
     const day2=req.body.day2;
     const month2=req.body.month2;
     const year2=req.body.year2;
-
-    const {id}=req.params;
-    const vehicles=await Vehicle.findById(id);
+    const {id}=req.params.id;
+    const vehicles=await Vehicle.findById(req.params.id);
     
     let date1=new Date(year1,month1,day1-30,0-18,0-30,0,0).toISOString();
     let date2=new Date(year2,month2-1,day2,23+5,59+30,59,0).toISOString();
@@ -112,24 +115,25 @@ app.post('/:id/searchFuel',catchAsync(async(req,res,next)=>{
     // console.log(date1);
     // console.log(date2);
     
-
+    // console.log(vehicles);
+    // console.log(ObjectId(vehicles).toString());
         const fuelNew=await Fuel.find({vehicle:ObjectId(vehicles).toString(), time:{$gte:date1,$lte:date2}});
         // console.log(fuelNew);
-        console.log(ObjectId(vehicles).toString());
+        //console.log(ObjectId(vehicles).toString());
     
-    // console.log(id);
 
-    const fuelBefore=await Fuel.find({vehicle:id});
+    const fuelBefore=await Fuel.find({vehicle:ObjectId(vehicles).toString()});
 
-        const vehicleNew=await Vehicle.updateOne({_id:id},{ fuels : fuelNew});
+        const vehicleNew=await Vehicle.updateOne({_id:ObjectId(vehicles).toString()},{ fuels : fuelNew});
     // console.log(vehicleNew);
 
-        const vehicle=await Vehicle.findById(id).populate('fuels');
-    // console.log(vehicle);
+        const vehicle=await Vehicle.findById(ObjectId(vehicles).toString()).populate({path: "fuels", select:["time","volume"], options:{sort: {time:1}}});
+     //console.log(vehicle);
 
+        
         res.render('fuels/index',{vehicle})
 
-        const fuelAfter=await Vehicle.updateOne({_id:id},{ fuels : fuelBefore});        
+        const fuelAfter=await Vehicle.updateOne({_id:ObjectId(vehicles).toString()},{ fuels : fuelBefore});        
 
     }
     
